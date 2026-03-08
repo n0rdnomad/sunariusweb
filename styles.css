@@ -29,6 +29,7 @@
 html {
     scroll-behavior: smooth;
     overflow-x: clip;
+    background-color: var(--bg-color);
     /* clip instead of hidden allows position: sticky to work */
 }
 
