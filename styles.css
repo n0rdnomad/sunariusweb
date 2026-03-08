@@ -1,6 +1,6 @@
 /* --- BASE VARIABLES --- */
 :root {
-    --bg-color: #030504;
+    --bg-color: #000000;
     --terminal-green: #39ff14;
     --terminal-green-dim: rgba(57, 255, 20, 0.2);
     --terminal-green-bright: #7bff5a;
@@ -29,25 +29,38 @@
 html {
     scroll-behavior: smooth;
     overflow-x: clip;
-    background-color: var(--bg-color);
+    background-color: #000000;
+    /* explicit dark color */
     /* clip instead of hidden allows position: sticky to work */
 }
 
 body {
-    background-color: var(--bg-color);
+    background-color: #000000;
+    /* explicit dark color */
     color: var(--text-color);
     font-family: var(--font-mono);
     line-height: 1.6;
     overflow-x: clip;
     /* clip instead of hidden allows position: sticky to work */
     position: relative;
-    /* Complex background: hex grid + radial gradient vignette */
+}
+
+/* Pseudo element for fixed background instead of body background-attachment: fixed (iOS Safari bug fix) */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+    z-index: -1;
     background-image:
         radial-gradient(circle at center, transparent 30%, #000 100%),
         linear-gradient(rgba(57, 255, 20, 0.03) 1px, transparent 1px),
         linear-gradient(90deg, rgba(57, 255, 20, 0.03) 1px, transparent 1px);
     background-size: 100% 100%, 40px 40px, 40px 40px;
-    background-attachment: fixed;
+    pointer-events: none;
 }
 
 /* --- CRT & ENVIRONMENTAL EFFECTS --- */
@@ -56,7 +69,8 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 100vh;
+    height: 100dvh;
     z-index: 0;
     pointer-events: none;
 }
@@ -66,7 +80,8 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 100vh;
+    height: 100dvh;
     /* Vignette and subtle color tint */
     background: radial-gradient(circle, rgba(10, 25, 10, 0) 50%, rgba(0, 5, 0, 0.85) 100%);
     pointer-events: none;
@@ -79,7 +94,8 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 100vh;
+    height: 100dvh;
     /* Moving scanlines */
     background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 0.08) 50%, rgba(0, 0, 0, 0.08));
     background-size: 100% 4px;
@@ -711,14 +727,17 @@ main {
     justify-content: center;
     align-items: center;
     opacity: 0;
+    visibility: hidden;
     pointer-events: none;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.3s ease, visibility 0s linear 0.3s;
     backdrop-filter: blur(10px);
 }
 
 .lightbox.active {
     opacity: 1;
+    visibility: visible;
     pointer-events: auto;
+    transition: opacity 0.3s ease, visibility 0s linear 0s;
 }
 
 .lightbox-content {
@@ -962,9 +981,10 @@ main {
 
 /* --- FOOTER --- */
 footer {
-    background: #020302;
+    background: #000000;
+    /* Matches var(--bg-color) */
     border-top: 2px solid #111;
-    padding: 3rem 0;
+    padding: 3rem 0 calc(3rem + env(safe-area-inset-bottom)) 0;
     text-align: center;
     position: relative;
 }
