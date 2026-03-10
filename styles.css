@@ -490,6 +490,37 @@ main {
     }
 }
 
+.hero-socials {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+.social-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
+    border: 1px solid var(--terminal-green-dim);
+    border-radius: 5px;
+    color: var(--terminal-green);
+    font-size: 1.5rem;
+    background: rgba(10, 15, 10, 0.5);
+    transition: all 0.3s ease;
+    box-shadow: 0 0 5px inset rgba(57, 255, 20, 0.1);
+}
+
+.social-icon:hover {
+    background: rgba(57, 255, 20, 0.15);
+    color: #fff;
+    border-color: var(--terminal-green);
+    transform: translateY(-3px);
+    box-shadow: 0 0 15px inset rgba(57, 255, 20, 0.3), 0 0 15px var(--terminal-green);
+    text-shadow: var(--glow-shadow);
+}
+
 /* --- TRAILER SECTION --- */
 .trailer-section {
     padding: 6rem 0;
