@@ -1211,4 +1211,25 @@ footer::before {
     .panel-body {
         padding: 1.5rem;
     }
+
+    .terminal-box {
+        padding: 1.5rem 1rem;
+    }
+
+    .highlight-box h2 {
+        font-size: 1.8rem;
+        word-break: break-word;
+    }
+
+    .highlight-box p {
+        font-size: 1.1rem;
+    }
+
+    .dev-status-text {
+        font-size: 1.1rem;
+    }
+    
+    .cta-section {
+        padding: 5rem 0;
+    }
 }
