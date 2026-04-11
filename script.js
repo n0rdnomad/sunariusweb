@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const mobileMenu = document.getElementById('mobile-menu');
     const navLinks = document.querySelector('.nav-links');
 
-    if (mobileMenu) {
+    if (mobileMenu && navLinks) {
         mobileMenu.addEventListener('click', () => {
             mobileMenu.classList.toggle('active');
             navLinks.classList.toggle('active');
@@ -13,22 +13,32 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Smooth Scrolling for Navigation ---
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
+            const targetId = this.getAttribute('href').slice(1);
+
+            if (!targetId) {
+                e.preventDefault();
+                return;
+            }
+
+            const target = document.getElementById(targetId);
+            if (!target) {
+                return;
+            }
+
             e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                const offset = 75; // navbar height offset
-                const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - offset;
 
-                window.scrollTo({
-                    top: targetPosition,
-                    behavior: 'smooth'
-                });
+            const offset = 75; // navbar height offset
+            const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - offset;
 
-                // Close mobile menu on click
-                if (mobileMenu && mobileMenu.classList.contains('active')) {
-                    mobileMenu.classList.remove('active');
-                    navLinks.classList.remove('active');
-                }
+            window.scrollTo({
+                top: targetPosition,
+                behavior: 'smooth'
+            });
+
+            // Close mobile menu on click
+            if (mobileMenu && navLinks && mobileMenu.classList.contains('active')) {
+                mobileMenu.classList.remove('active');
+                navLinks.classList.remove('active');
             }
         });
     });
@@ -37,110 +47,120 @@ document.addEventListener('DOMContentLoaded', () => {
     // Removed to stop flickering on the text below the logo
 
     // --- Image Carousel ---
+    let autoplayTimer;
+    let resetAutoplay = () => {};
+
     const track = document.querySelector('.carousel-track');
-    const slides = Array.from(track.children);
     const nextBtn = document.querySelector('.next-btn');
     const prevBtn = document.querySelector('.prev-btn');
+    const carouselContainer = document.querySelector('.carousel-container');
+    const slides = track ? Array.from(track.children) : [];
 
-    let currentIndex = 0;
-
-    function getVisibleSlidesCount() {
-        return window.innerWidth <= 768 ? 1 : 3;
-    }
-
-    function updateCarousel() {
-        const slideWidth = document.querySelector('.carousel-slide').clientWidth;
-        track.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
-    }
-
-    nextBtn.addEventListener('click', () => {
-        const visibleSlides = getVisibleSlidesCount();
-        const maxIndex = slides.length - visibleSlides;
-        currentIndex++;
-        if (currentIndex > maxIndex) {
-            currentIndex = 0; // Loop back
-        }
-        updateCarousel();
-    });
-
-    prevBtn.addEventListener('click', () => {
-        const visibleSlides = getVisibleSlidesCount();
-        const maxIndex = slides.length - visibleSlides;
-        currentIndex--;
-        if (currentIndex < 0) {
-            currentIndex = maxIndex; // Loop to end
-        }
-        updateCarousel();
-    });
-
-    // Handle resize
-    window.addEventListener('resize', () => {
-        const visibleSlides = getVisibleSlidesCount();
-        const maxIndex = slides.length - visibleSlides;
-        if (currentIndex > maxIndex) {
-            currentIndex = maxIndex;
-        }
-        updateCarousel();
-    });
-
-    // Touch Events for Carousel Swiping
     let startX = 0;
     let endX = 0;
-    const carouselContainer = document.querySelector('.carousel-container');
 
-    carouselContainer.addEventListener('touchstart', (e) => {
-        startX = e.touches[0].clientX;
-    }, { passive: true });
+    if (track && nextBtn && prevBtn && carouselContainer && slides.length > 0) {
+        let currentIndex = 0;
 
-    carouselContainer.addEventListener('touchmove', (e) => {
-        endX = e.touches[0].clientX;
-    }, { passive: true });
-
-    carouselContainer.addEventListener('touchend', () => {
-        if (!startX || !endX) return;
-
-        const threshold = 50; // Minimum swipe distance
-        if (startX - endX > threshold) {
-            // Swipe left (next slide)
-            nextBtn.click();
-        } else if (endX - startX > threshold) {
-            // Swipe right (previous slide)
-            prevBtn.click();
+        function getVisibleSlidesCount() {
+            return window.innerWidth <= 768 ? 1 : 3;
         }
 
-        // Reset values
-        startX = 0;
-        endX = 0;
+        function updateCarousel() {
+            const firstSlide = slides[0];
+            if (!firstSlide) {
+                return;
+            }
 
-        // Restart autoplay to prevent immediate slide after interaction
-        resetAutoplay();
-    });
+            const slideWidth = firstSlide.clientWidth;
+            track.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
+        }
 
-    // Auto-play Carousel
-    let autoplayTimer;
-
-    function startAutoplay() {
-        autoplayTimer = setInterval(() => {
+        nextBtn.addEventListener('click', () => {
             const visibleSlides = getVisibleSlidesCount();
             const maxIndex = slides.length - visibleSlides;
             currentIndex++;
             if (currentIndex > maxIndex) {
-                currentIndex = 0;
+                currentIndex = 0; // Loop back
             }
             updateCarousel();
-        }, 5000); // 5 seconds per slide
-    }
+        });
 
-    function resetAutoplay() {
-        clearInterval(autoplayTimer);
+        prevBtn.addEventListener('click', () => {
+            const visibleSlides = getVisibleSlidesCount();
+            const maxIndex = slides.length - visibleSlides;
+            currentIndex--;
+            if (currentIndex < 0) {
+                currentIndex = maxIndex; // Loop to end
+            }
+            updateCarousel();
+        });
+
+        // Handle resize
+        window.addEventListener('resize', () => {
+            const visibleSlides = getVisibleSlidesCount();
+            const maxIndex = slides.length - visibleSlides;
+            if (currentIndex > maxIndex) {
+                currentIndex = Math.max(0, maxIndex);
+            }
+            updateCarousel();
+        });
+
+        // Touch Events for Carousel Swiping
+        carouselContainer.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+        }, { passive: true });
+
+        carouselContainer.addEventListener('touchmove', (e) => {
+            endX = e.touches[0].clientX;
+        }, { passive: true });
+
+        carouselContainer.addEventListener('touchend', () => {
+            if (!startX || !endX) {
+                return;
+            }
+
+            const threshold = 50; // Minimum swipe distance
+            if (startX - endX > threshold) {
+                // Swipe left (next slide)
+                nextBtn.click();
+            } else if (endX - startX > threshold) {
+                // Swipe right (previous slide)
+                prevBtn.click();
+            }
+
+            // Reset values
+            startX = 0;
+            endX = 0;
+
+            // Restart autoplay to prevent immediate slide after interaction
+            resetAutoplay();
+        });
+
+        // Auto-play Carousel
+        function startAutoplay() {
+            autoplayTimer = setInterval(() => {
+                const visibleSlides = getVisibleSlidesCount();
+                const maxIndex = slides.length - visibleSlides;
+                currentIndex++;
+                if (currentIndex > maxIndex) {
+                    currentIndex = 0;
+                }
+                updateCarousel();
+            }, 5000); // 5 seconds per slide
+        }
+
+        resetAutoplay = () => {
+            clearInterval(autoplayTimer);
+            startAutoplay();
+        };
+
+        // Attach reset to manual buttons too
+        nextBtn.addEventListener('click', resetAutoplay);
+        prevBtn.addEventListener('click', resetAutoplay);
+
         startAutoplay();
     }
-
-    // Attach reset to manual buttons too
-    nextBtn.addEventListener('click', resetAutoplay);
-    prevBtn.addEventListener('click', resetAutoplay);
-
-    startAutoplay();
 
     // --- Spark Particles Background ---
     const canvas = document.getElementById('sparks-canvas');
