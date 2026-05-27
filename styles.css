@@ -730,6 +730,12 @@ main {
     box-shadow: 0 0 5px inset rgba(57, 255, 20, 0.1);
 }
 
+.vk-icon {
+    width: 1.9rem;
+    height: 1.9rem;
+    fill: currentColor;
+}
+
 .social-icon:hover {
     background: rgba(57, 255, 20, 0.15);
     color: #fff;
