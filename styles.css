@@ -644,6 +644,168 @@ main {
     animation: floating 6s ease-in-out infinite;
 }
 
+.donation-panel {
+    width: 100%;
+    max-width: 520px;
+    margin: 0 auto 2rem auto;
+    padding: 1.35rem 1.6rem 1.5rem;
+    text-align: center;
+    overflow: hidden;
+    z-index: 10;
+    background:
+        radial-gradient(circle at 20% 0%, rgba(255, 176, 0, 0.2), transparent 32%),
+        radial-gradient(circle at 90% 90%, rgba(57, 255, 20, 0.16), transparent 34%),
+        linear-gradient(135deg, rgba(8, 10, 9, 0.96) 0%, rgba(22, 25, 22, 0.92) 100%);
+    border-color: rgba(255, 176, 0, 0.55);
+    box-shadow:
+        inset 0 0 35px rgba(0, 0, 0, 0.95),
+        inset 0 0 24px rgba(255, 176, 0, 0.08),
+        0 0 0 4px var(--metal-dark),
+        0 0 0 6px rgba(255, 176, 0, 0.28),
+        0 0 26px rgba(255, 176, 0, 0.18),
+        0 0 42px rgba(57, 255, 20, 0.1);
+}
+
+.donation-panel > *:not(.donation-cyber-grid):not(.donation-corner) {
+    position: relative;
+    z-index: 3;
+}
+
+.donation-cyber-grid {
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(90deg, rgba(57, 255, 20, 0.05) 1px, transparent 1px),
+        linear-gradient(rgba(255, 176, 0, 0.045) 1px, transparent 1px),
+        linear-gradient(110deg, transparent 0%, transparent 42%, rgba(255, 176, 0, 0.18) 50%, transparent 58%, transparent 100%);
+    background-size: 34px 34px, 34px 34px, 220% 100%;
+    opacity: 0.75;
+    pointer-events: none;
+    animation: donation-sweep 5s linear infinite;
+}
+
+.donation-corner {
+    position: absolute;
+    width: 34px;
+    height: 34px;
+    border-color: var(--terminal-amber);
+    filter: drop-shadow(0 0 8px rgba(255, 176, 0, 0.7));
+    pointer-events: none;
+    z-index: 4;
+}
+
+.donation-corner-tl {
+    top: 12px;
+    left: 12px;
+    border-top: 2px solid;
+    border-left: 2px solid;
+}
+
+.donation-corner-tr {
+    top: 12px;
+    right: 12px;
+    border-top: 2px solid;
+    border-right: 2px solid;
+}
+
+.donation-corner-bl {
+    bottom: 12px;
+    left: 12px;
+    border-bottom: 2px solid;
+    border-left: 2px solid;
+}
+
+.donation-corner-br {
+    right: 12px;
+    bottom: 12px;
+    border-right: 2px solid;
+    border-bottom: 2px solid;
+}
+
+@keyframes donation-sweep {
+    0% {
+        background-position: 0 0, 0 0, 180% 0;
+    }
+
+    100% {
+        background-position: 0 0, 0 0, -80% 0;
+    }
+}
+
+.donation-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+    border-bottom: 1px dashed rgba(255, 176, 0, 0.45);
+    padding-bottom: 0.65rem;
+}
+
+.donation-header h2 {
+    margin: 0;
+    color: var(--terminal-amber);
+    font-family: var(--font-heading);
+    font-size: 2.2rem;
+    letter-spacing: 4px;
+    line-height: 1;
+    position: relative;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-shadow: 0 0 10px rgba(255, 176, 0, 0.5);
+}
+
+.donation-signal-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 0.8rem;
+    color: var(--terminal-green);
+    font-size: 0.72rem;
+    letter-spacing: 2px;
+    opacity: 0.82;
+    text-shadow: var(--glow-shadow);
+}
+
+.donation-copy {
+    margin: 0 0 1.05rem 0;
+    color: var(--text-color);
+    font-size: 1rem;
+    line-height: 1.4;
+    text-shadow: 0 0 8px rgba(57, 255, 20, 0.18);
+}
+
+.paypal-donate-module {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 58px;
+    padding: 0.75rem 1rem;
+    background:
+        linear-gradient(90deg, transparent, rgba(57, 255, 20, 0.08), transparent),
+        rgba(0, 0, 0, 0.34);
+    border: 1px solid rgba(57, 255, 20, 0.26);
+    box-shadow:
+        inset 0 0 18px rgba(57, 255, 20, 0.08),
+        0 0 16px rgba(255, 176, 0, 0.08);
+}
+
+#donate-button img {
+    max-width: 100%;
+    height: auto;
+    filter:
+        drop-shadow(0 0 8px rgba(255, 176, 0, 0.35))
+        drop-shadow(0 0 14px rgba(57, 255, 20, 0.16));
+    transition: transform 0.25s ease, filter 0.25s ease;
+}
+
+#donate-button img:hover {
+    transform: translateY(-2px);
+    filter:
+        drop-shadow(0 0 10px rgba(255, 176, 0, 0.65))
+        drop-shadow(0 0 18px rgba(57, 255, 20, 0.3));
+}
+
 @keyframes floating {
     0% {
         transform: translateY(0px);
@@ -1376,6 +1538,30 @@ footer::before {
 
     .terminal-box {
         padding: 1.5rem 1rem;
+    }
+
+    .donation-panel {
+        padding: 1.2rem 1rem 1.25rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .donation-header h2 {
+        font-size: 1.65rem;
+        letter-spacing: 3px;
+    }
+
+    .donation-signal-row {
+        font-size: 0.65rem;
+        letter-spacing: 1px;
+        gap: 0.5rem;
+    }
+
+    .donation-copy {
+        font-size: 0.92rem;
+    }
+
+    .paypal-donate-module {
+        padding: 0.65rem 0.5rem;
     }
 
     .highlight-box h2 {

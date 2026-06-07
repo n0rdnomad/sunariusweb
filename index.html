@@ -56,6 +56,36 @@
                 <div class="hero-logo-wrapper">
                     <img src="assets/LOGO.png" alt="Sunarius Game Logo" class="hero-logo">
                 </div>
+                <div class="donation-panel terminal-box" aria-labelledby="donation-title">
+                    <span class="donation-cyber-grid" aria-hidden="true"></span>
+                    <span class="donation-corner donation-corner-tl" aria-hidden="true"></span>
+                    <span class="donation-corner donation-corner-tr" aria-hidden="true"></span>
+                    <span class="donation-corner donation-corner-bl" aria-hidden="true"></span>
+                    <span class="donation-corner donation-corner-br" aria-hidden="true"></span>
+                    <div class="donation-header">
+                        <h2 id="donation-title" class="donation-cyber-text" data-text="DONATIONS">DONATIONS</h2>
+                    </div>
+                    <div class="donation-signal-row">
+                        <span>SUPPORT_CHANNEL</span>
+                        <span>PAYPAL_SECURE</span>
+                    </div>
+                    <p class="donation-copy">Support Sunarius RPG mobile game development and help us build the best mobile RPG!</p>
+                    <div id="donate-button-container" class="paypal-donate-module">
+                        <div id="donate-button"></div>
+                        <script src="https://www.paypalobjects.com/donate/sdk/donate-sdk.js" charset="UTF-8"></script>
+                        <script>
+                            PayPal.Donation.Button({
+                                env: 'production',
+                                hosted_button_id: '3TC3ZSZES4ZFW',
+                                image: {
+                                    src: 'https://pics.paypal.com/00/s/ZjlkOTBlYzAtNGU3Ny00ZGQ4LTkwNGMtNjk1NjE3ZWM3ODE3/file.PNG',
+                                    alt: 'Donate with PayPal button',
+                                    title: 'PayPal - The safer, easier way to pay online!',
+                                }
+                            }).render('#donate-button');
+                        </script>
+                    </div>
+                </div>
                 <div class="hero-content terminal-box">
                     <h1 class="glitch-text" data-text="SYSTEM INITIATED...">SYSTEM INITIATED...</h1>
                     <p class="tagline typewriter">Post Apocalyptic cRPG. Tactical strategy. Survival.</p>
