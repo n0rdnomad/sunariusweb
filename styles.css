@@ -788,7 +788,7 @@ main {
 .donation-panel {
     width: 100%;
     max-width: 520px;
-    margin: 0 auto 2rem auto;
+    margin: 2rem auto 0;
     padding: 1.35rem 1.6rem 1.5rem;
     text-align: center;
     overflow: hidden;
@@ -981,34 +981,10 @@ main {
 }
 
 .typewriter {
-    border-right: .15em solid var(--terminal-green);
-    white-space: nowrap;
-    overflow: hidden;
+    white-space: normal;
+    overflow-wrap: anywhere;
     margin: 0 auto;
-    animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite;
-    max-width: fit-content;
-}
-
-@keyframes typing {
-    from {
-        width: 0
-    }
-
-    to {
-        width: 100%
-    }
-}
-
-@keyframes blink-caret {
-
-    from,
-    to {
-        border-color: transparent
-    }
-
-    50% {
-        border-color: var(--terminal-green);
-    }
+    max-width: 100%;
 }
 
 .hero-socials {
@@ -1708,12 +1684,6 @@ footer::before {
         font-size: 2rem;
     }
 
-    .typewriter {
-        white-space: normal;
-        border-right: none;
-        animation: none;
-    }
-
     .monitor-frame {
         max-width: 100%;
         padding: 30px 15px 40px 15px;
@@ -1753,7 +1723,7 @@ footer::before {
 
     .donation-panel {
         padding: 1.2rem 1rem 1.25rem;
-        margin-bottom: 1.5rem;
+        margin-top: 1.5rem;
     }
 
     .donation-header h2 {

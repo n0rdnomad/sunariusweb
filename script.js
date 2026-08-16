@@ -43,9 +43,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // --- Glitch Text Effect ---
-    // Removed to stop flickering on the text below the logo
-
     // --- Image Carousel ---
     let autoplayTimer;
     let resetAutoplay = () => {};
