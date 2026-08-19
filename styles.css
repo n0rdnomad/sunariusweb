@@ -1461,6 +1461,23 @@ main {
     margin-bottom: 1.5rem;
 }
 
+.privacy-heading {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    color: var(--terminal-green);
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    text-transform: uppercase;
+}
+
+.privacy-list {
+    margin: 0 0 1.5rem 20px;
+}
+
+.privacy-list li {
+    margin-bottom: 10px;
+}
+
 .panel-body strong {
     color: var(--terminal-green-bright);
     font-weight: normal;
