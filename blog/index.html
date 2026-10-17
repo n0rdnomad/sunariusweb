@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#000000" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Sunarius Blog: Tactical &amp; Post-Apocalyptic RPG Guides</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=VT323&display=swap" rel="stylesheet">
+    <!-- Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <!-- Styles -->
+    <link rel="stylesheet" href="/styles.css?v=1.5">
+    <!-- SEO -->
+    <meta name="description" content="Guides from the developer of Sunarius: the best games like Fallout, Battle Brothers, Wasteland 2 and ATOM RPG, with honest notes on what runs on Android.">
+    <link rel="canonical" href="https://sunarius.com/blog/">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+    <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Sunarius">
+    <meta property="og:title" content="Sunarius Blog: Tactical &amp; Post-Apocalyptic RPG Guides">
+    <meta property="og:description" content="Guides from the developer of Sunarius: the best games like Fallout, Battle Brothers, Wasteland 2 and ATOM RPG, with honest notes on what runs on Android.">
+    <meta property="og:url" content="https://sunarius.com/blog/">
+    <meta property="og:image" content="https://sunarius.com/assets/og-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Sunarius logo: post-apocalyptic tactical RPG">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Sunarius Blog: Tactical &amp; Post-Apocalyptic RPG Guides">
+    <meta name="twitter:description" content="Guides from the developer of Sunarius: the best games like Fallout, Battle Brothers, Wasteland 2 and ATOM RPG, with honest notes on what runs on Android.">
+    <meta name="twitter:image" content="https://sunarius.com/assets/og-image.jpg">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "Blog",
+                "@id": "https://sunarius.com/blog/#blog",
+                "name": "> Blog",
+                "description": "Guides from the developer of Sunarius: the best games like Fallout, Battle Brothers, Wasteland 2 and ATOM RPG, with honest notes on what runs on Android.",
+                "url": "https://sunarius.com/blog/",
+                "inLanguage": "en",
+                "publisher": {
+                    "@id": "https://sunarius.com/#org"
+                },
+                "blogPost": [
+                    {
+                        "@type": "BlogPosting",
+                        "headline": "Best Games Like Fallout on Android – Fallout 1 & 2 Alternatives",
+                        "url": "https://sunarius.com/games-like-fallout-android/",
+                        "datePublished": "2026-10-17",
+                        "author": {
+                            "@id": "https://sunarius.com/#org"
+                        }
+                    },
+                    {
+                        "@type": "BlogPosting",
+                        "headline": "Best Games Like Battle Brothers on Android",
+                        "url": "https://sunarius.com/games-like-battle-brothers-android/",
+                        "datePublished": "2026-10-17",
+                        "author": {
+                            "@id": "https://sunarius.com/#org"
+                        }
+                    },
+                    {
+                        "@type": "BlogPosting",
+                        "headline": "Best Games Like Wasteland 2 on Android",
+                        "url": "https://sunarius.com/games-like-wasteland-2-android/",
+                        "datePublished": "2026-10-17",
+                        "author": {
+                            "@id": "https://sunarius.com/#org"
+                        }
+                    },
+                    {
+                        "@type": "BlogPosting",
+                        "headline": "Best Games Like ATOM RPG on Android",
+                        "url": "https://sunarius.com/games-like-atom-rpg-android/",
+                        "datePublished": "2026-10-17",
+                        "author": {
+                            "@id": "https://sunarius.com/#org"
+                        }
+                    }
+                ]
+            },
+            {
+                "@type": "Organization",
+                "@id": "https://sunarius.com/#org",
+                "name": "The Light Workers",
+                "url": "https://sunarius.com/",
+                "logo": "https://sunarius.com/assets/LOGO.png"
+            },
+            {
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                    {
+                        "@type": "ListItem",
+                        "position": 1,
+                        "name": "Home",
+                        "item": "https://sunarius.com/"
+                    },
+                    {
+                        "@type": "ListItem",
+                        "position": 2,
+                        "name": "Blog",
+                        "item": "https://sunarius.com/blog/"
+                    }
+                ]
+            }
+        ]
+    }
+    </script>
+</head>
+
+<body>
+    <canvas id="sparks-canvas"></canvas>
+    <div class="crt-overlay"></div>
+    <div class="scanlines"></div>
+
+    <nav class="navbar">
+        <div class="container nav-container">
+            <span class="nav-brand">SUNARIUS_RPG</span>
+            <div class="menu-toggle" id="mobile-menu" role="button" tabindex="0" aria-label="Toggle menu" aria-expanded="false">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="/#hero">Start</a></li>
+                <li><a href="/#trailer">Trailer</a></li>
+                <li><a href="/#screenshots">Intel</a></li>
+                <li><a href="/#about">Database</a></li>
+                <li><a href="/#features">Specs</a></li>
+                <li><a href="/blog/">Blog</a></li>
+                <li><a href="https://www.indiedb.com/games/sunarius-post-apocalyptic-rpg/presskit" target="_blank"
+                        rel="noopener noreferrer">Press Kit</a></li>
+                <li><a href="/account.html">Account</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <section class="about-section legal-section">
+            <div class="container">
+                <nav class="breadcrumbs" aria-label="Breadcrumb">
+                    <ol>
+                        <li><a href="/">Home</a></li>
+                        <li aria-current="page">Blog</li>
+                    </ol>
+                </nav>
+                <div class="terminal-panel">
+                    <div class="panel-header">
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                        <span class="panel-title">BLOG.TXT</span>
+                    </div>
+                    <div class="panel-body">
+                        <h1 class="section-title legal-title">&gt; Blog</h1>
+                        <p>Notes and guides from the solo developer of Sunarius, a post-apocalyptic tactical RPG for Android.
+                        Our first series looks at the games that inspired Sunarius and at what fans of those games can play on Android and
+                        PC. We are transparent about it: Sunarius is our own game and appears first in every list.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="features-section blog-list-section" aria-label="Articles">
+            <div class="container">
+                <div class="features-grid blog-grid">
+                    <article class="feature-card">
+                        <div class="scan-effect"></div>
+                        <h2><a href="/games-like-fallout-android/">Best games like Fallout on Android</a></h2>
+                        <p>Fallout 1 and 2 never came to Android, so here is what to play instead, on your phone and on PC.</p>
+                        <a class="read-more" href="/games-like-fallout-android/" aria-label="Read more: Best games like Fallout on Android">> Read more</a>
+                    </article>
+                    <article class="feature-card">
+                        <div class="scan-effect"></div>
+                        <h2><a href="/games-like-battle-brothers-android/">Best games like Battle Brothers on Android</a></h2>
+                        <p>Squad management and turn-based tactics in the spirit of Battle Brothers, with honest notes on which games run on mobile.</p>
+                        <a class="read-more" href="/games-like-battle-brothers-android/" aria-label="Read more: Best games like Battle Brothers on Android">> Read more</a>
+                    </article>
+                    <article class="feature-card">
+                        <div class="scan-effect"></div>
+                        <h2><a href="/games-like-wasteland-2-android/">Best games like Wasteland 2 on Android</a></h2>
+                        <p>Party-based tactical CRPGs for fans of Wasteland 2, from an Android squad RPG to the classics on PC.</p>
+                        <a class="read-more" href="/games-like-wasteland-2-android/" aria-label="Read more: Best games like Wasteland 2 on Android">> Read more</a>
+                    </article>
+                    <article class="feature-card">
+                        <div class="scan-effect"></div>
+                        <h2><a href="/games-like-atom-rpg-android/">Best games like ATOM RPG on Android</a></h2>
+                        <p>Finished ATOM RPG? Here are post-apocalyptic RPGs with the same bleak atmosphere and old-school mechanics.</p>
+                        <a class="read-more" href="/games-like-atom-rpg-android/" aria-label="Read more: Best games like ATOM RPG on Android">> Read more</a>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container footer-container">
+            <div class="footer-links">
+                <a href="/">> About</a>
+                <a href="/privacy.html">> Privacy Policy</a>
+                <a href="/terms.html">> Terms and Conditions</a>
+                <a href="mailto:support@sunarius.com">> Contact</a>
+            </div>
+            <div class="footer-copy">
+                &copy; 2026 Sunarius Game. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script src="/script.js?v=1.5"></script>
+</body>
+
+</html>

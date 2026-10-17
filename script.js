@@ -1,12 +1,23 @@
 document.addEventListener('DOMContentLoaded', () => {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
     // --- Mobile Menu Toggle ---
     const mobileMenu = document.getElementById('mobile-menu');
     const navLinks = document.querySelector('.nav-links');
 
     if (mobileMenu && navLinks) {
-        mobileMenu.addEventListener('click', () => {
-            mobileMenu.classList.toggle('active');
-            navLinks.classList.toggle('active');
+        const toggleMenu = () => {
+            const isOpen = navLinks.classList.toggle('active');
+            mobileMenu.classList.toggle('active', isOpen);
+            mobileMenu.setAttribute('aria-expanded', String(isOpen));
+        };
+
+        mobileMenu.addEventListener('click', toggleMenu);
+        mobileMenu.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                toggleMenu();
+            }
         });
     }
 
@@ -32,13 +43,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
             window.scrollTo({
                 top: targetPosition,
-                behavior: 'smooth'
+                behavior: prefersReducedMotion ? 'auto' : 'smooth'
             });
 
             // Close mobile menu on click
             if (mobileMenu && navLinks && mobileMenu.classList.contains('active')) {
                 mobileMenu.classList.remove('active');
                 navLinks.classList.remove('active');
+                mobileMenu.setAttribute('aria-expanded', 'false');
             }
         });
     });
@@ -58,6 +70,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (track && nextBtn && prevBtn && carouselContainer && slides.length > 0) {
         let currentIndex = 0;
+
+        // Screenshots are lazy so they don't compete with the hero on first load.
+        // Off-screen slides are clipped by the carousel and would only start loading
+        // when slid into view, so load them all once the carousel approaches.
+        const slideImages = track.querySelectorAll('img[loading="lazy"]');
+        const loadAllSlides = () => slideImages.forEach(img => { img.loading = 'eager'; });
+        if ('IntersectionObserver' in window) {
+            const preloadObserver = new IntersectionObserver((entries, observer) => {
+                if (entries.some(entry => entry.isIntersecting)) {
+                    loadAllSlides();
+                    observer.disconnect();
+                }
+            }, { rootMargin: '600px 0px' });
+            preloadObserver.observe(carouselContainer);
+        } else {
+            loadAllSlides();
+        }
 
         function getVisibleSlidesCount() {
             return window.innerWidth <= 768 ? 1 : 3;
@@ -136,6 +165,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Auto-play Carousel
         function startAutoplay() {
+            if (prefersReducedMotion) {
+                return;
+            }
+
             autoplayTimer = setInterval(() => {
                 const visibleSlides = getVisibleSlidesCount();
                 const maxIndex = slides.length - visibleSlides;
@@ -161,7 +194,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Spark Particles Background ---
     const canvas = document.getElementById('sparks-canvas');
-    if (canvas) {
+    if (canvas && !prefersReducedMotion) {
         const ctx = canvas.getContext('2d');
 
         function resizeCanvas() {

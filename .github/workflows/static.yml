@@ -33,11 +33,17 @@ jobs:
         uses: actions/checkout@v4
       - name: Setup Pages
         uses: actions/configure-pages@v5
+      - name: Collect site files
+        # Publish only what the site uses: no source PNGs, .DS_Store, .github, .claude
+        run: |
+          mkdir -p _site/assets
+          cp *.html styles.css script.js robots.txt sitemap.xml .nojekyll _site/
+          cp -R blog games-like-* _site/
+          cp assets/*.webp assets/LOGO.png assets/og-image.jpg assets/favicon-32.png assets/apple-touch-icon.png _site/assets/
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Upload entire repository
-          path: '.'
+          path: '_site'
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
