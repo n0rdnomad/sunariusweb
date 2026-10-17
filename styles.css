@@ -1492,22 +1492,6 @@ footer::before {
     margin-bottom: 0.5rem;
 }
 
-.ours-badge {
-    display: inline-block;
-    margin-left: 0.5rem;
-    padding: 0 0.5rem;
-    border: 1px solid var(--terminal-amber);
-    color: var(--terminal-amber);
-    font-size: 1rem;
-    text-shadow: none;
-    vertical-align: middle;
-}
-
-.disclosure {
-    border-left: 3px solid var(--terminal-amber);
-    padding-left: 1rem;
-}
-
 .article-shots {
     display: grid;
     grid-template-columns: 2fr 1fr;
