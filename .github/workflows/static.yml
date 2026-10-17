@@ -34,10 +34,11 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Collect site files
-        # Publish only what the site uses: no source PNGs, .DS_Store, .github, .claude
+        # Publish only what the site uses: no source PNGs, .DS_Store, .github, .claude.
+        # *.txt covers robots.txt and app-ads.txt (AdMob verification must stay at the domain root).
         run: |
           mkdir -p _site/assets
-          cp *.html styles.css script.js robots.txt sitemap.xml .nojekyll _site/
+          cp *.html *.txt styles.css script.js sitemap.xml .nojekyll _site/
           cp -R blog games-like-* _site/
           cp assets/*.webp assets/LOGO.png assets/og-image.jpg assets/favicon-32.png assets/apple-touch-icon.png _site/assets/
       - name: Upload artifact
