@@ -12,8 +12,9 @@
     --metal-light: #323a35;
     --rust: #6b3317;
 
-    --font-mono: 'Share Tech Mono', monospace;
-    --font-heading: 'VT323', monospace;
+    /* VT323 and Share Tech Mono have no Cyrillic: Russian glyphs fall back to Handjet and PT Mono */
+    --font-mono: 'Share Tech Mono', 'PT Mono', monospace;
+    --font-heading: 'VT323', 'Handjet', monospace;
 
     --glow-shadow: 0 0 5px var(--terminal-green), 0 0 12px var(--terminal-green-dim);
     --glow-intense: 0 0 8px var(--terminal-green), 0 0 20px var(--terminal-green), 0 0 40px var(--terminal-green-dim);
@@ -491,6 +492,41 @@ a:hover {
     list-style: none;
     display: flex;
     gap: 2.5rem;
+    margin-left: auto;
+    order: 1;
+}
+
+/* EN | RU switcher: right of the menu on desktop, next to the hamburger on mobile */
+.lang-switch {
+    order: 2;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-left: 2rem;
+    font-family: var(--font-heading);
+    font-size: 1.35rem;
+    line-height: 1;
+    color: var(--metal-light);
+    position: relative;
+    z-index: 10011;
+}
+
+.lang-switch a {
+    color: var(--text-color);
+    opacity: 0.65;
+    padding: 0.25rem 0.15rem;
+}
+
+.lang-switch a:hover,
+.lang-switch a:focus-visible {
+    opacity: 1;
+    color: var(--terminal-green-bright);
+}
+
+.lang-switch a[aria-current="true"] {
+    opacity: 1;
+    color: var(--terminal-green-bright);
+    text-shadow: var(--glow-shadow);
 }
 
 .nav-links a {
@@ -517,6 +553,7 @@ a:hover {
 }
 
 .menu-toggle {
+    order: 3;
     display: none;
     flex-direction: column;
     justify-content: space-between;
@@ -711,17 +748,6 @@ main {
     text-shadow: 0 0 10px rgba(255, 176, 0, 0.5);
 }
 
-.donation-signal-row {
-    display: flex;
-    justify-content: space-between;
-    gap: 1rem;
-    margin-bottom: 0.8rem;
-    color: var(--terminal-green);
-    font-size: 0.72rem;
-    letter-spacing: 2px;
-    opacity: 0.82;
-    text-shadow: var(--glow-shadow);
-}
 
 .donation-copy {
     margin: 0 0 1.05rem 0;
@@ -760,6 +786,38 @@ main {
     filter:
         drop-shadow(0 0 10px rgba(255, 176, 0, 0.65))
         drop-shadow(0 0 18px rgba(57, 255, 20, 0.3));
+}
+
+/* Russian support block: VK and Telegram contact buttons instead of PayPal */
+.support-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+}
+
+.community-forum-btn.support-btn {
+    width: 100%;
+    min-height: 64px;
+    margin-top: 0;
+    font-size: 1.8rem;
+    gap: 1rem;
+}
+
+.community-forum-btn.support-btn i {
+    font-size: 2rem;
+}
+
+.community-forum-btn.support-btn .vk-icon {
+    position: relative;
+    z-index: 1;
+    width: 2.4rem;
+    height: 2.4rem;
+    color: var(--terminal-green);
+    filter: drop-shadow(0 0 4px var(--terminal-green-dim));
+}
+
+.donation-header h2 {
+    text-wrap: balance;
 }
 
 @keyframes floating {
@@ -1613,10 +1671,15 @@ footer::before {
 }
 
 /* --- RESPONSIVE --- */
-/* Hamburger menu: the full menu needs ~900px in one row */
-@media (max-width: 980px) {
+/* Hamburger menu: the full menu plus EN|RU switcher needs ~1060px in one row (Russian labels are longer) */
+@media (max-width: 1100px) {
     .menu-toggle {
         display: flex;
+    }
+
+    .lang-switch {
+        margin-left: auto;
+        margin-right: 1.25rem;
     }
 
     .nav-links {
@@ -1720,11 +1783,6 @@ footer::before {
         letter-spacing: 3px;
     }
 
-    .donation-signal-row {
-        font-size: 0.65rem;
-        letter-spacing: 1px;
-        gap: 0.5rem;
-    }
 
     .donation-copy {
         font-size: 0.92rem;

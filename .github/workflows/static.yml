@@ -39,7 +39,7 @@ jobs:
         run: |
           mkdir -p _site/assets
           cp *.html *.txt styles.css script.js sitemap.xml .nojekyll _site/
-          cp -R blog games-like-* _site/
+          cp -R blog games-like-* ru _site/
           cp assets/*.webp assets/LOGO.png assets/og-image.jpg assets/favicon-32.png assets/apple-touch-icon.png _site/assets/
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
