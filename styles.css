@@ -1642,6 +1642,36 @@ footer::before {
     padding-top: 0;
 }
 
+/* Blog hub: breadcrumbs only above the list, then article cards in a single stack */
+.about-section.blog-head {
+    padding-bottom: 1rem;
+}
+
+/* Same content width as the card stack below (960px + container padding) */
+.about-section.blog-head .container {
+    max-width: 1000px;
+}
+
+.features-grid.blog-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+/* Visible to search engines and screen readers, hidden on screen */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
 .blog-grid .feature-card h2 {
     margin-bottom: 1rem;
     font-size: 1.7rem;
